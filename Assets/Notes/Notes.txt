@@ -1,0 +1,72 @@
+GAMESESSION IS ONLY ON THE FIRST LEVEL!!!
+
+Story
+- The block maker has kidnapped the princess.  You must wander through the castle
+	to save her.
+- Each room will have a level of the game
+
+Level completion bonus - Set Timer length for each level
+
+Lives - Every 50 or 100 points?
+
+Splash Screen
+- Autoplay game with just a few blocks
+- Create a script so splash screen is always the same?
+
+Options Screen
+- Difficulty
+- Music Volume
+- SFX Volume
+- Save Game
+
+Win Screen
+- Only when all levels are completed
+- New Game
+	- Goes to first level
+- Main Menu
+- Quit
+
+Lose Screen
+- All levels not completed
+- Try Again button 
+	- Goes to last level played
+- New Game
+	- Goes to first level
+- Main Menu
+- Quit
+
+Start Screen
+- Tell story of princess
+
+Power Ups
+- Paddle Size
+- Multiple Lives
+- Ball Speed
+- Multiple Paddles
+
+Increase difficulty
+- Increase by level or score?
+- Change paddle size
+- Change paddle speed
+- Change ball speed
+- Reduce number of lives at start
+- Increase number of points to earn next life
+
+Ball stuck in loop
+- Count number of times ball richochets without a collision
+	- Push ball in random direction
+	- Push ball up or left?
+- Always give the ball a natural up/left bias?
+	- Will this increase the ball speed too much?
+
+Improve game object art quality
+- Make all 3d?
+- Make appear 3d through light and shadow?
+
+Exploding Block
+- VFX in all 9 squares?
+- Different SFX
+
+Make information bar across top of screen?
+- Number of lives
+- Number of blocks remaining
