@@ -5,14 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private GameSession _gameSession;
 
+    private void Start()
+    {
+        _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
+        if(_gameSession == null )
+        {
+            Debug.Log("Game Session is Null!");
+        }
+    }
     public void LoadNextScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         // Count number of scenes.  If last scene, go to first scene        
         if (currentSceneIndex == SceneManager.sceneCountInBuildSettings + 1)
         {
-            FindObjectOfType<GameSession>().ResetGame();
+            _gameSession.ResetGame();
             Invoke("LoadEndScene", .1f);
         }
         else
@@ -21,9 +30,20 @@ public class SceneLoader : MonoBehaviour
         }        
     }
 
-    public void LoadStartScene()
+    // The first _level of the game needs to always be called Level001
+    public void LoadFirstLevel()
+    {
+        SceneManager.LoadScene("Level001");
+    }
+
+    public void LoadMainMenuReset()
     {        
-        FindObjectOfType<GameSession>().ResetGame();
+        _gameSession.ResetGame();
+        SceneManager.LoadScene(0);
+    }
+
+    public void LoadMainMenu()
+    {
         SceneManager.LoadScene(0);
     }
 
@@ -31,6 +51,11 @@ public class SceneLoader : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+
+    public void LoadInstructionsScene()
+    {
+        SceneManager.LoadScene("Z_Instructions");
     }
 
     public void LoadEndScene()

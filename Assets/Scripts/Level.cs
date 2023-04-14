@@ -4,32 +4,46 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    private int breakableBlocks;
-    private SceneLoader sceneLoader;
-    private BonusTimer bonusTimer;
-    private GameSession gameSession;
+    private int _breakableBlocks;
+    private SceneLoader _sceneLoader;
+    private BonusTimer _bonusTimer;
+    private GameSession _gameSession;
 
-    private void Awake()
+    private void Start()
     {
-        sceneLoader = FindObjectOfType<SceneLoader>();
-        bonusTimer = FindObjectOfType<BonusTimer>();
-        gameSession = FindObjectOfType<GameSession>();
+        _sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
+        if(_sceneLoader == null)
+        {
+            Debug.Log("Scene Loader is Null!");
+        }
+
+        _bonusTimer = GameObject.Find("Bonus Timer").GetComponent<BonusTimer>();
+        if(_bonusTimer == null)
+        {
+            Debug.Log("Bonus Timer is Null!");
+        }
+
+        _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
+        if(_gameSession == null)
+        {
+            Debug.Log("Game Session is Null!");
+        }
     }
 
     public void CountBlocks()
     {
-        breakableBlocks++;
+        _breakableBlocks++;
     }
 
     public void BlockDestroyed()
     {
-        breakableBlocks--;
+        _breakableBlocks--;
 
-        if (breakableBlocks == 0)
+        if (_breakableBlocks == 0)
         {
-            int bonus = bonusTimer.GetCurrentTimer();
-            gameSession.AddBonus(bonus);
-            sceneLoader.LoadNextScene();
+            int bonus = _bonusTimer.GetCurrentTimer();
+            _gameSession.AddBonus(bonus);
+            _sceneLoader.LoadNextScene();
         }
     }
 }

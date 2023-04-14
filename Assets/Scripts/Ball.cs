@@ -1,40 +1,62 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {    
     [SerializeField]
-    private Paddle paddle1;
+    private Paddle _paddle1;
     [SerializeField]
-    private Vector2 launchVelocity;
+    private Vector2 _launchVelocity;
     [SerializeField]
-    private AudioClip[] ballSounds;
+    private AudioClip[] _ballSounds;
     [SerializeField]
-    private AudioClip launchBallSFX;
+    private AudioClip _launchBallSFX;
     [SerializeField]
-    private float randomFactor = 0.2f;
+    private float _randomFactor = 0.2f;
 
-    private Vector2 paddleToBallOffset;
-    private bool hasStarted = false;
-    private AudioSource myAudioSource;
-    private Rigidbody2D myRigidBody2D;
-    private BonusTimer bonusTimer;
-    private GameSession gameSession;
+    private Vector2 _paddleToBallOffset;
+    private bool _hasStarted = false;
+
+    private AudioSource _audioSource;
+    private Rigidbody2D _rigidBody2D;
+    private BonusTimer _bonusTimer;
+    private GameSession _gameSession;
+    private AudioClip _audioClip;
 
     private void Awake()
     {
-        myAudioSource = GetComponent<AudioSource>();
-        myRigidBody2D = GetComponent<Rigidbody2D>();
-        bonusTimer = FindObjectOfType<BonusTimer>();
-        gameSession = FindObjectOfType<GameSession>();
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            Debug.Log("My Audio Source is Null!");
+        }
+        
+        _rigidBody2D = GetComponent<Rigidbody2D>();
+        if(_rigidBody2D == null)
+        {
+            Debug.Log("My RIgid Body is Null!");
+        }
+        
+        _bonusTimer = GameObject.Find("Bonus Timer").GetComponent<BonusTimer>();
+        if(_bonusTimer == null)
+        {
+            Debug.Log("Bonus Timer is Null!");
+        }
+        
+        _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
+        if(_gameSession == null) 
+        {
+            Debug.Log("Game Session is Null!");
+        }
 
-        paddleToBallOffset = gameObject.transform.position - paddle1.transform.position;
+        _paddleToBallOffset = gameObject.transform.position - _paddle1.transform.position;
     }
 
     private void LateUpdate()
     {
-        if(!hasStarted)
+        if(!_hasStarted)
         {
             LockBallToPaddle();
             LaunchBallOnMouseClick();
@@ -43,32 +65,32 @@ public class Ball : MonoBehaviour
 
     private void LockBallToPaddle()
     {
-        Vector2 paddlePos = new Vector2(paddle1.transform.position.x, paddle1.transform.position.y);
-        gameObject.transform.position = paddlePos + paddleToBallOffset;
+        Vector2 paddlePos = new Vector2(_paddle1.transform.position.x, _paddle1.transform.position.y);
+        gameObject.transform.position = paddlePos + _paddleToBallOffset;
     }
 
     private void LaunchBallOnMouseClick()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            hasStarted = true;
-            myAudioSource.PlayOneShot(launchBallSFX);
-            myRigidBody2D.velocity = launchVelocity;
-            bonusTimer.StartTimer();
+            _hasStarted = true;
+            _audioSource.PlayOneShot(_launchBallSFX);
+            _rigidBody2D.velocity = _launchVelocity;
+            _bonusTimer.StartTimer();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        float x = Random.Range(-randomFactor, randomFactor);
-        float y = Random.Range(0, randomFactor);
+        float x = Random.Range(-_randomFactor, _randomFactor);
+        float y = Random.Range(0, _randomFactor);
         Vector2 velocityTweak = new Vector2(x, y);
 
-        if (hasStarted)
+        if (_hasStarted)
         {
-            myRigidBody2D.velocity += velocityTweak;
-            AudioClip clip = ballSounds[Random.Range(0, ballSounds.Length)];
-            myAudioSource.PlayOneShot(clip);
+            _rigidBody2D.velocity += velocityTweak;
+            _audioClip = _ballSounds[Random.Range(0, _ballSounds.Length)];
+            _audioSource.PlayOneShot(_audioClip);
         }
     }
 }

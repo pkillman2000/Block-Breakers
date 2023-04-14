@@ -7,15 +7,13 @@ using System;
 public class GameSession : MonoBehaviour
 {
     [Range(0.1f, 10f)][SerializeField]
-    private float gameSpeed = 1f;    
+    private float _gameSpeed = 1f;    
     [SerializeField]
-    private TextMeshProUGUI scoreText;
+    private TextMeshProUGUI _scoreText;
     [SerializeField]
-    private bool isAutoPlayEnabled;
-    [SerializeField]
-    float timerLength = 1000f;
+    private bool _isAutoPlayEnabled;
 
-    private int currentScore = 0;
+    private int _currentScore = 0;
 
     private void Awake()
     {
@@ -37,39 +35,38 @@ public class GameSession : MonoBehaviour
 
     private void LateUpdate()
     {
-        Time.timeScale = gameSpeed;        
+        Time.timeScale = _gameSpeed;        
     }
 
     public void AddToScore(int pointsToAdd)
     {
-        currentScore += pointsToAdd;
-        scoreText.text = currentScore.ToString();
+        _currentScore += pointsToAdd;
+        _scoreText.text = _currentScore.ToString();
     }
 
     public void AddBonus(int bonusToAdd)
     {
-        currentScore += bonusToAdd;
-        scoreText.text = currentScore.ToString();
+        _currentScore += bonusToAdd;
+        _scoreText.text = _currentScore.ToString();
     }
 
     public void HideScoreText()
     {
-        scoreText.text = "";
+        _scoreText.text = "";
     }
 
     public void ResetGame()
     {
-        Debug.Log("Reset Game");
         Destroy(this.gameObject);
     }
 
     public bool IsAutoPlayEnabled()
     {
-        return isAutoPlayEnabled;
+        return _isAutoPlayEnabled;
     }
 
     public int GetCurrentScore()
     {
-        return currentScore;
+        return _currentScore;
     }
 }

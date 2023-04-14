@@ -5,18 +5,27 @@ using UnityEngine;
 public class ExplodeArea : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip breakSound;
+    private AudioClip _breakSound;
     [SerializeField]
-    private GameObject blockSparklesVFX;
+    private GameObject _blockSparklesVFX;
 
-    Level level;
-    GameSession gameStatus;
+    Level _level;
+    GameSession _gameSession;
 
     private void Start()
     {
-        gameStatus = FindObjectOfType<GameSession>();
-        level = FindObjectOfType<Level>();
-        level.CountBlocks();
+        _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
+        if(_gameSession == null)
+        {
+            Debug.Log("Game Session is Null!");
+        }
+        _level = GameObject.Find("Level").GetComponent<Level>();
+        if(_level == null)
+        {
+            Debug.Log("Level is Null!");
+        }
+
+        _level.CountBlocks();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,21 +46,21 @@ public class ExplodeArea : MonoBehaviour
                 int points = collider2D.GetComponent<Block>().GetHitSprites();
                 DestroyBlock(blockLocation);
                 Destroy(collider2D.gameObject);
-                gameStatus.AddToScore(points);
+                _gameSession.AddToScore(points);
             }
         }
         
-        level.BlockDestroyed();
+        _level.BlockDestroyed();
         Destroy(this.gameObject);
     }
 
     private void DestroyBlock(Vector2 blockLocation)
     {
-        GameObject sparkles = Instantiate(blockSparklesVFX, blockLocation, Quaternion.identity);
+        GameObject sparkles = Instantiate(_blockSparklesVFX, blockLocation, Quaternion.identity);
         Destroy(sparkles, .5f);
-        AudioSource.PlayClipAtPoint(breakSound, Camera.main.transform.position);
-        level.BlockDestroyed();
-        gameStatus.AddToScore(1);
+        AudioSource.PlayClipAtPoint(_breakSound, Camera.main.transform.position);
+        _level.BlockDestroyed();
+        _gameSession.AddToScore(1);
     }
 
 }

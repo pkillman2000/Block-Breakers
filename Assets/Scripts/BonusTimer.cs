@@ -6,48 +6,48 @@ using TMPro;
 public class BonusTimer : MonoBehaviour
 {
     [SerializeField]
-    float timerLength;
+    float _timerLength;
     [SerializeField]
-    private TextMeshProUGUI bonusTimerText;
+    private TextMeshProUGUI _bonusTimerText;
 
-    private bool timerStart = false;
+    private bool _timerStart = false;
 
-    private float currentTimer;
+    private float _currentTimer;
 
-    private void Start()
+    private void Awake()
     {
-        currentTimer = timerLength;
-        bonusTimerText.text = Mathf.RoundToInt(currentTimer).ToString();
+        _currentTimer = _timerLength;
+        _bonusTimerText.text = Mathf.RoundToInt(_currentTimer).ToString();
     }
 
     public void StartTimer()
     {
-        timerStart = true;
+        _timerStart = true;
     }
 
     private void Update()
     {
-        if(timerStart == true)
+        if(_timerStart == true)
         {
             CountDown();
-            bonusTimerText.text = Mathf.RoundToInt(currentTimer).ToString();
+            _bonusTimerText.text = Mathf.RoundToInt(_currentTimer).ToString();
         }
     }
 
     private void CountDown()
     {
-        if (currentTimer <= 0)
+        if (_currentTimer <= 0)
         {
-            currentTimer = 0;
+            _currentTimer = 0;
         }
         else
         {
-            currentTimer -= Time.deltaTime;
+            _currentTimer -= Time.deltaTime;
         }        
     }
 
     public int GetCurrentTimer()
     {
-        return Mathf.RoundToInt(currentTimer);
+        return Mathf.RoundToInt(_currentTimer);
     }
 }

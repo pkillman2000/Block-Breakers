@@ -6,37 +6,45 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip breakSound;
+    private AudioClip _breakSound;
     [SerializeField]
-    private GameObject blockSparklesVFX;
+    private GameObject _blockSparklesVFX;
+    private int _timesHit;
     [SerializeField]
-    private int timesHit;
+    private Sprite[] _hitSprites;
     [SerializeField]
-    private Sprite[] hitSprites;
-    [SerializeField]
-    private int pointsPerHitSprites;
+    private int _pointsPerHitSprites;
 
-    Level level;
-    GameSession gameStatus;
+    Level _level;
+    GameSession _gameSession;
 
     private void Start()
     {
-        CountBreakableBlocks();
+        _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
+        if(_gameSession == null)
+        {
+            Debug.Log("Game Session is Null");
+        }
 
-        gameStatus = FindObjectOfType<GameSession>();
+        _level = GameObject.Find("Level").GetComponent<Level>();        
+        if(_level == null)
+        {
+            Debug.Log("Level is Null");
+        }
+
+        CountBreakableBlocks();
     }
 
     public int GetHitSprites()
     {
-        return hitSprites.Length + 1;
+        return _hitSprites.Length + 1;
     }
 
     private void CountBreakableBlocks()
     {
         if (tag == "Breakable")
         {
-            level = FindObjectOfType<Level>();
-            level.CountBlocks();
+            _level.CountBlocks();
         }
     }
 
@@ -50,9 +58,9 @@ public class Block : MonoBehaviour
 
     private void HandleHit()
     {
-        timesHit++;
-        int maxHits = hitSprites.Length + 1;
-        if (timesHit >= maxHits)
+        _timesHit++;
+        int maxHits = _hitSprites.Length + 1;
+        if (_timesHit >= maxHits)
         {
             DestroyBlock();
         }
@@ -64,10 +72,10 @@ public class Block : MonoBehaviour
 
     private void ShowNextHitSprite()
     {
-        int spriteIndex = timesHit - 1;
-        if(hitSprites[spriteIndex] != null)
+        int spriteIndex = _timesHit - 1;
+        if(_hitSprites[spriteIndex] != null)
         {
-            GetComponent<SpriteRenderer>().sprite = hitSprites[spriteIndex];
+            GetComponent<SpriteRenderer>().sprite = _hitSprites[spriteIndex];
         }
         else
         {
@@ -78,15 +86,15 @@ public class Block : MonoBehaviour
     private void DestroyBlock()
     {        
         TriggerSparklesVFX();
-        AudioSource.PlayClipAtPoint(breakSound, Camera.main.transform.position);        
-        gameStatus.AddToScore(hitSprites.Length + 1);        
-        level.BlockDestroyed();
+        AudioSource.PlayClipAtPoint(_breakSound, Camera.main.transform.position);        
+        _gameSession.AddToScore(_hitSprites.Length + 1);        
+        _level.BlockDestroyed();
         Destroy(this.gameObject);
     }
 
     private void TriggerSparklesVFX()
     {
-        GameObject sparkles = Instantiate(blockSparklesVFX, transform.position, transform.rotation);
+        GameObject sparkles = Instantiate(_blockSparklesVFX, transform.position, transform.rotation);
         Destroy(sparkles, .5f);
     }
 }

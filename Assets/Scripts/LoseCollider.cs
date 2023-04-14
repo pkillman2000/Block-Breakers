@@ -5,18 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class LoseCollider : MonoBehaviour
 {
-    SceneLoader sceneLoader;
+    SceneLoader _sceneLoader;
 
     private void Awake()
     {
-        sceneLoader = FindObjectOfType<SceneLoader>();
+        _sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
+        if(_sceneLoader == null)
+        {
+            Debug.Log("Scene Loader is Null!");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Ball")
         {
-            sceneLoader.LoadEndScene();
+            _sceneLoader.LoadEndScene();
         } 
         else if(collision.tag == "AdditionalBall")
         {
