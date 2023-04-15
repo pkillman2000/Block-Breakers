@@ -140,7 +140,6 @@ MonoBehaviour:
   _paddle1: {fileID: 0}
   _launchVelocity: {x: 3, y: 16}
   _ballSounds:
-  - {fileID: 8300000, guid: 9173d5fc41a46d445bb7780a1393694a, type: 3}
   - {fileID: 8300000, guid: 63ef2aa16a7a888478867880b7a608c4, type: 3}
   - {fileID: 8300000, guid: 7b10dc89fe092bd499243ae1d27c542a, type: 3}
   - {fileID: 8300000, guid: 3ee39449136284f498802d598c493c23, type: 3}

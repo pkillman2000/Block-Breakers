@@ -269,7 +269,7 @@ MonoBehaviour:
   m_text: "Left click to launch the ball and start the game.\nUse your mouse to move
     the paddle left or right.  \nThe faster you complete a level, the more points
     you get.\nAs the game gets harder, the paddle size will shrink and the ball will
-    move faster."
+    move faster.\nPressing 'A' will enable Auto-Play mode."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d384d6a4c0727148b350fb847b138b7, type: 2}
   m_sharedMaterial: {fileID: 3602145326101339160, guid: 3d384d6a4c0727148b350fb847b138b7,

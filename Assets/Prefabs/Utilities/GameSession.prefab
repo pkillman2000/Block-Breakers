@@ -183,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameSpeed: 1
   _scoreText: {fileID: 3646679978768128964}
-  _isAutoPlayEnabled: 1
+  _isAutoPlayEnabled: 0
 --- !u!82 &7425919042991396866
 AudioSource:
   m_ObjectHideFlags: 0
@@ -196,7 +196,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 52ac9cc299adf37479c4d116555e5378, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.493
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0

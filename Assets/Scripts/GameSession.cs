@@ -33,6 +33,13 @@ public class GameSession : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            _isAutoPlayEnabled = !_isAutoPlayEnabled;
+        }
+    }
     private void LateUpdate()
     {
         Time.timeScale = _gameSpeed;        

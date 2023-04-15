@@ -31,6 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 2.75, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,9 +47,12 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -60,6 +64,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -132,7 +137,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -228,8 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d55cc446992ba46b92ad8cf7d93658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSounds:
-  - {fileID: 8300000, guid: 9173d5fc41a46d445bb7780a1393694a, type: 3}
+  _ballSounds:
   - {fileID: 8300000, guid: 63ef2aa16a7a888478867880b7a608c4, type: 3}
   - {fileID: 8300000, guid: 7b10dc89fe092bd499243ae1d27c542a, type: 3}
-  randomFactor: 0.2
+  - {fileID: 8300000, guid: 3ee39449136284f498802d598c493c23, type: 3}
+  - {fileID: 8300000, guid: 712681f68a2378a4fb40baa0852e3478, type: 3}
+  _randomFactor: 0.2
